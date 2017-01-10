@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>icons/axe.svg</file>
-        <file>icons/faucet.svg</file>
         <file>icons/color.svg</file>
         <file>icons/open.svg</file>
         <file>icons/kit.png</file>
