@@ -60,14 +60,14 @@ Gui::MenuItem* Workbench::setupMenuBar() const
     Gui::MenuItem* mccad = new Gui::MenuItem;
     root->insertItem(item, mccad);                      // insert new item before item "Windows"
     mccad->setCommand("McCad");                         // name if menu item
-    *mccad << "McCad_Split";
+    *mccad << "McCad_Import" << "McCad_ColorGroups" << "McCad_ShowMaterialWindow";
            //<< "Separator" << "McCad_Split";          // entries in menu
 
-    Gui::MenuItem* mccadTest = new Gui::MenuItem;
-    Gui::MenuItem* newItem = root->findItem("McCad");
-    root->insertItem(newItem, mccadTest);
-    mccadTest->setCommand("McCad2");
-    *mccadTest << "McCad_Split";
+//    Gui::MenuItem* mccadTest = new Gui::MenuItem;
+//    Gui::MenuItem* newItem = root->findItem("McCad");
+//    root->insertItem(newItem, mccadTest);
+//    mccadTest->setCommand("McCad2");
+//    *mccadTest << "McCad_ShowMaterialWindow";
 
     return root;
 }
@@ -83,6 +83,17 @@ Gui::ToolBarItem* Workbench::setupToolBars() const
     Gui::ToolBarItem* root = StdWorkbench::setupToolBars();
     Gui::ToolBarItem* mccad = new Gui::ToolBarItem(root);
     mccad->setCommand("McCad Tools");
-    *mccad << "McCad_Import" << "Separator" << "McCad_ColorGroups" << "McCad_Split";
+    *mccad << "McCad_Import" << "McCad_ColorGroups" << "McCad_ShowMaterialWindow";
     return root;
+}
+
+void Workbench::setupContextMenu(const char* recipient, Gui::MenuItem* menuItem) const
+{
+    if(strcmp(recipient, "View")){
+        //Base::Console().Message(recipient);
+        *menuItem << "McCad_ShowMaterialWindow" << "Separator"
+                  << "Std_ShowSelection" << "Std_HideSelection" << "Std_ToggleSelectability" << "Separator"
+                  << "Std_SetAppearance" << "Std_ToggleVisibility" << "Std_RandomColor" << "Separator"
+                  << "Std_Delete";
+    }
 }

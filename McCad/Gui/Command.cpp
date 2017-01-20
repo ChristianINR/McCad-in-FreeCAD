@@ -39,6 +39,7 @@
 #include <cstdlib>
 #include <ctime>
 #include "McCadUtils.h"
+#include "MaterialWindow.hpp"
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -84,7 +85,7 @@ CmdMcCadSplit::CmdMcCadSplit()
     sWhatsThis      = QT_TR_NOOP("Split");
     sStatusTip      = QT_TR_NOOP("Split");
     sPixmap         = "axe.svg";
-    sAccel          = "CTRL+S";
+    //sAccel          = "CTRL+S";
 }
 
 void CmdMcCadSplit::activated(int iMsg)
@@ -104,7 +105,7 @@ CmdMcCadSplit2::CmdMcCadSplit2()
     sWhatsThis      = QT_TR_NOOP("Split2");
     sStatusTip      = QT_TR_NOOP("Split2");
     sPixmap         = "axe.svg";
-    sAccel          = "CTRL+T";
+    //sAccel          = "CTRL+T";
 }
 
 void CmdMcCadSplit2::activated(int iMsg)
@@ -125,7 +126,7 @@ CmdMcCadImport::CmdMcCadImport()
     sWhatsThis      = QT_TR_NOOP("Import");
     sStatusTip      = QT_TR_NOOP("Import");
     sPixmap         = "open.svg";
-    sAccel          = "CTRL+I";
+    //sAccel          = "CTRL+I";
 
 }
 
@@ -156,12 +157,33 @@ void CmdMcCadColorGroups::activated(int iMsg)
     McCadUtils::colorAllGroups();
 }
 
+DEF_STD_CMD(CmdMcCadShowMaterialWindow)
+
+CmdMcCadShowMaterialWindow::CmdMcCadShowMaterialWindow()
+    : Command("McCad_ShowMaterialWindow")
+{
+    sAppModule      = "McCad";
+    sGroup          = QT_TR_NOOP("McCad");
+    sMenuText       = QT_TR_NOOP("Show material window");
+    sToolTipText    = QT_TR_NOOP("Show material window");
+    sWhatsThis      = QT_TR_NOOP("Show material window");
+    sStatusTip      = QT_TR_NOOP("Show material window");
+    sPixmap         = "axe.svg";
+}
+
+void CmdMcCadShowMaterialWindow::activated(int iMsg)
+{
+    MaterialWindow* materialWindow = new MaterialWindow();
+    materialWindow->exec();
+}
+
 void CreateMcCadCommands(void)
 {
     Gui::CommandManager &rcCmdMgr = Gui::Application::Instance->commandManager();
     rcCmdMgr.addCommand(new CmdMcCadSplit());
     rcCmdMgr.addCommand(new CmdMcCadColorGroups());
     rcCmdMgr.addCommand(new CmdMcCadImport());
+    rcCmdMgr.addCommand(new CmdMcCadShowMaterialWindow());
 }
 
 

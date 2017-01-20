@@ -39,6 +39,7 @@ public:
 protected:
     Gui::MenuItem* setupMenuBar() const;
     Gui::ToolBarItem* setupToolBars() const;
+    void setupContextMenu(const char*, Gui::MenuItem*) const;
 };
 
 } // namespace McCadGui
